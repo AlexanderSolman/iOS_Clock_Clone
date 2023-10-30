@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="search_bar_mod" parent="Widget.AppCompat.SearchView">
+        <item name="searchViewStyle">@style/search_bar_mod</item>
+        <item name="android:editTextColor">@color/iron</item>
+        <item name="android:textColorHint">@color/iron</item>
+    </style>
+
+    <style name="global_header_mod">
+        <item name="android:textColor">@color/cotton</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+</resources>

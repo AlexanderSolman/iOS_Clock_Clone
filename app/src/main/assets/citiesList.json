@@ -1,0 +1,87 @@
+[
+  {
+    "city": "Stockholm",
+    "country": "Sweden",
+    "timeZoneId": "Europe/Stockholm"
+  },
+  {
+    "city": "New York",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "timeZoneId": "Europe/Copenhagen"
+  },
+  {
+    "city": "Helsinki",
+    "country": "Finland",
+    "timeZoneId": "Europe/Helsinki"
+  },
+  {
+    "city": "Reykjavik",
+    "country": "Iceland",
+    "timeZoneId": "Europe/Reykjavik"
+  },
+  {
+    "city": "London",
+    "country": "UK",
+    "timeZoneId": "Europe/London"
+  },
+  {
+    "city": "Paris",
+    "country": "France",
+    "timeZoneId": "Europe/Paris"
+  },
+  {
+    "city": "Madrid",
+    "country": "Spain",
+    "timeZoneId": "Europe/Madrid"
+  },
+  {
+    "city": "Rome",
+    "country": "Italy",
+    "timeZoneId": "Europe/Rome"
+  },
+  {
+    "city": "Zurich",
+    "country": "Switzerland",
+    "timeZoneId": "Europe/Zurich"
+  },
+  {
+    "city": "Prague",
+    "country": "Czechia",
+    "timeZoneId": "Europe/Prague"
+  },
+  {
+    "city": "Warsaw",
+    "country": "Poland",
+    "timeZoneId": "Europe/Warsaw"
+  },
+  {
+    "city": "Montreal",
+    "country": "Canada",
+    "timeZoneId": "America/Montreal"
+  },
+  {
+    "city": "Ottawa",
+    "country": "Canada",
+    "timeZoneId": "America/Ottawa"
+  },
+  {
+    "city": "Toronto",
+    "country": "Canada",
+    "timeZoneId": "America/Toronto"
+  },
+  {
+    "city": "Chicago",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Vancouver",
+    "country": "Canada",
+    "timeZoneId": "America/Vancouver"
+  }
+]

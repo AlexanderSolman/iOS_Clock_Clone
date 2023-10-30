@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IOS-Styled-Clock</string>
+    <string name="add_clock_button">Button to add clock</string>
+    <string name="global_time_header">Global time</string>
 </resources>

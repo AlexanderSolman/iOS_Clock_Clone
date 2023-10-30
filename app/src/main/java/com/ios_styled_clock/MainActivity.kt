@@ -43,16 +43,23 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO ability to continue running app in previous state upon pause or shut down
+        // TODO save all variables and states, i.e diff, lists
+        if (savedInstanceState != null) {
+            // Restore data -- Dont need to save trueTime or timeToUse cause its systemTime || calculated via timeDifference
+            timeDifference = savedInstanceState.getLong("timeDifference", timeDifference)
+        }
+
         //Checking network
         checkInternet()
 
         // NTP call task running each new minute
-        val timeTask = Timer()
-        timeTask.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskOne() } }, initialDelay(), 60 * 1000)
+        val ntpCallTimer = Timer()
+        ntpCallTimer.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskOne() } }, initialDelay(), 60 * 1000)
 
         // Keeping the clock up to date continuously
-        val timeTask2 = Timer()
-        timeTask2.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskTwo() } },0, 1000)
+        val clockUpdateTimer = Timer()
+        clockUpdateTimer.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskTwo() } },0, 1000)
 
         // Setting the views
         setContentView(R.layout.activity_main)

@@ -74,11 +74,31 @@ class BottomFragment() : Fragment() {
             }
             // Updates the list while text string is being written
             override fun onQueryTextChange(newText: String?): Boolean {
-
+                val filteredList = filterSearch(citiesList, newText)
+                citiesAdapter = CitiesAdapter(requireContext(), sortList(filteredList))
+                citySelectionListener?.let { citiesAdapter!!.setCitySelectionListener(it) }
+                citiesRecyclerView.adapter = citiesAdapter
                 return true
             }
         })
         return view
+    }
+
+    fun filterSearch(unFilteredList: List<Cities>, query: String?): List<Cities> {
+        if (query.isNullOrBlank()){
+            return unFilteredList
+        }
+        val filteredList = mutableListOf<Cities>()
+        for (city in unFilteredList) {
+            if (city.getCity().contains(query, ignoreCase = true) || city.getCountry().contains(query, ignoreCase = true)) {
+                filteredList.add(city)
+            }
+        }
+        return filteredList
+    }
+
+    fun sortList(citiesList: List<Cities>): List<Cities> {
+        return citiesList.sortedBy { it.getCity() }
     }
 
     // Called from main when new instance of fragment is called, listener is set

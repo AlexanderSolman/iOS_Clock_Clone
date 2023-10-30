@@ -51,7 +51,7 @@ class BottomFragment() : Fragment() {
         val citiesJsonSource = CitiesJsonSource(requireContext())
         val citiesList = citiesJsonSource.getCities()
         // Setting the adapter variable to hold the rv of CitiesAdapter
-        citiesAdapter = CitiesAdapter(requireContext(), citiesList)
+        citiesAdapter = CitiesAdapter(requireContext(), sortList(citiesList))
         // Assuring that the listener is not overwritten with new instance
         citySelectionListener?.let { citiesAdapter!!.setCitySelectionListener(it) }
         // Setting the rv to the rv.adapter i.e displaying the list of cities

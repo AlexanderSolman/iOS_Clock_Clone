@@ -6,34 +6,53 @@ import android.net.Network
 import android.net.NetworkRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.instacart.library.truetime.TrueTime
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import java.util.Timer
+import java.util.TimerTask
 
 
 class MainActivity : AppCompatActivity(), CitySelectionListener {
-    // Declaring variables
     private lateinit var imAddTime: ImageButton
     private lateinit var citySelectionView: RecyclerView
     private lateinit var citiesAdapter: CitiesAdapter
     private lateinit var citySelectAdapter: CitySelectionAdapter
+
     private var cityList: MutableList<Cities> = ArrayList()
-    private var timeToUse: Date? = Date(System.currentTimeMillis())
     private var isInternetAvailable: Boolean = false
+    private var ntpTimeSet: Boolean = false
+
+    private var timeToUse: Date? = Date(System.currentTimeMillis())
+    private var trueTime: Date? = null
+    private var timeDifference: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //Checking network
         checkInternet()
+
+        // NTP call task running each new minute
+        val timeTask = Timer()
+        timeTask.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskOne() } }, initialDelay(), 60 * 1000)
+
+        // Keeping the clock up to date continuously
+        val timeTask2 = Timer()
+        timeTask2.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskTwo() } },0, 1000)
 
         // Setting the views
         setContentView(R.layout.activity_main)
@@ -72,6 +91,55 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         }
     }
 
+    // Necessary annotation for coroutine below
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun runTaskOne() {
+        if (isInternetAvailable) {
+
+            // Running the NTP call in a coroutine to not block the
+            // program and make sure variables are set before use
+            GlobalScope.launch(Dispatchers.IO) {
+
+                // Calculating NTP call time i.e roundtrip (t4-t1)
+                // Division with 2 would be as close to server time as possible
+                val startTime = System.currentTimeMillis()
+                trueTimeNtp()
+                val endTime = System.currentTimeMillis()
+                val calculateRoundTripTime = (endTime - startTime) / 2
+
+                // Time difference holds the true ntp time against system time
+                if(trueTime != null) { timeDifference = trueTime!!.time - System.currentTimeMillis() + calculateRoundTripTime }
+            }
+        }else {
+            timeDifference = 0
+        }
+    }
+
+
+    private fun runTaskTwo() {
+        val systemTime = System.currentTimeMillis()
+        val calendar = Calendar.getInstance()
+
+        // If a connection exists and NTP time has been received, use NTP time else default system time
+        if (isInternetAvailable && trueTime != null){
+            timeToUse = Date(systemTime + timeDifference)
+            // TODO true = green for ntp synced time
+            ntpTimeSet = true
+        } else {
+            timeToUse = Date(systemTime)
+            // TODO false = red for non-synced system time
+            ntpTimeSet = false
+        }
+        // In case running on ntp time assuring calendar has time difference
+        calendar.time = timeToUse!!
+        if (calendar[Calendar.SECOND] == 0) {
+            // Putting the update on the ui thread for execution
+            runOnUiThread {
+                updateClock()
+            }
+        }
+    }
+
     // Interface listener, adding selected cities to main frame
     override fun onCitySelected(city: Cities) {
         cityList.add(city)
@@ -105,5 +173,28 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
             override fun onLost(network: Network) { isInternetAvailable = false }
         }
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+    }
+
+    // Calculating the initial delay until next minute
+    private fun initialDelay(): Long {
+        val calendar = Calendar.getInstance()
+        val differenceInSeconds = 60 - calendar[Calendar.SECOND]
+        return (differenceInSeconds * 1000).toLong()
+    }
+
+    private suspend fun trueTimeNtp() {
+        try {
+            // Setting up truetime to connect to NTP host '1.se.pool.ntp.org'
+            TrueTime.build()
+                .withNtpHost("1.se.pool.ntp.org")
+                .withConnectionTimeout(31428)
+                .withSharedPreferencesCache(this@MainActivity)
+                .withLoggingEnabled(true)
+                .initialize()
+            // Getting the time from ntp server and setting it to trueTime
+            if (TrueTime.isInitialized()) { trueTime = Date(TrueTime.now()!!.time) }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

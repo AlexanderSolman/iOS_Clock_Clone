@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.IOSStyledClock" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.IOSStyledClock" parent="Theme.AppCompat.Light.NoActionBar" />
 </resources>

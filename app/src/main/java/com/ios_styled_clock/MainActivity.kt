@@ -1,7 +1,12 @@
 package com.ios_styled_clock
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
@@ -22,9 +27,13 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
     private lateinit var citySelectAdapter: CitySelectionAdapter
     private var cityList: MutableList<Cities> = ArrayList()
     private var timeToUse: Date? = Date(System.currentTimeMillis())
+    private var isInternetAvailable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Checking network
+        checkInternet()
 
         // Setting the views
         setContentView(R.layout.activity_main)
@@ -83,5 +92,18 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
             val viewHolder = citySelectionView.findViewHolderForAdapterPosition(index) as CitySelectionAdapter.ViewHolder?
             viewHolder?.cityClockView?.text = zonedTime.let { timeFormat.format(it) }
         }
+    }
+
+    private fun checkInternet() {
+        // Setting up cm for checking connection and setting a request
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkRequest = NetworkRequest.Builder().build()
+
+        // Callback with parameters request, and result of avail/lost
+        val networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) { isInternetAvailable = true }
+            override fun onLost(network: Network) { isInternetAvailable = false }
+        }
+        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
     }
 }

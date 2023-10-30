@@ -85,18 +85,20 @@ class BottomFragment() : Fragment() {
     }
 
     fun filterSearch(unFilteredList: List<Cities>, query: String?): List<Cities> {
-        if (query.isNullOrBlank()){
-            return unFilteredList
-        }
+        // Returning if search is blank
+        if (query.isNullOrBlank()){ return unFilteredList }
+        // Looping the list to filter city or country by search string
         val filteredList = mutableListOf<Cities>()
         for (city in unFilteredList) {
             if (city.getCity().contains(query, ignoreCase = true) || city.getCountry().contains(query, ignoreCase = true)) {
                 filteredList.add(city)
             }
         }
+        // Returning the filtered list
         return filteredList
     }
 
+    // Function to handling sorting by city
     fun sortList(citiesList: List<Cities>): List<Cities> {
         return citiesList.sortedBy { it.getCity() }
     }

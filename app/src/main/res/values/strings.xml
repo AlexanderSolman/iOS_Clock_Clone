@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">IOS-Styled-Clock</string>
-    <string name="add_clock_button">Button to add clock</string>
+    <string name="add_clock_button">+</string>
     <string name="global_time_header">Global time</string>
     <string name="choose_a_city">Choose a city</string>
     <string name="cancel">Cancel</string>
     <string name="query_hint_search_bar">Search</string>
     <string name="city_name">City Name</string>
     <string name="default_time">00:00</string>
+    <string name="ntp_synced">Synced</string>
+    <string name="ntp_not_synced">Not Synced</string>
 </resources>

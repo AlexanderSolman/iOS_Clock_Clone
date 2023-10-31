@@ -8,18 +8,17 @@
     tools:context=".MainActivity">
 
     <!-- Add button -->
-    <ImageButton
+    <TextView
         android:id="@+id/addButton"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="25dp"
+        style="@style/add_button_mod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:background="#00000000"
-        android:contentDescription="@string/add_clock_button"
         android:scaleType="fitCenter"
+        android:text="@string/add_clock_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Global Time Header -->
     <TextView
@@ -54,5 +53,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp"
         android:visibility="gone" />
+
+    <!-- Ntp synced -->
+    <TextView
+        android:id="@+id/syncedNtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/ntp_synced"
+        android:textColor="@color/honey"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

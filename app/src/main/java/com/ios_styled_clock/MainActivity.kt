@@ -6,8 +6,11 @@ import android.net.Network
 import android.net.NetworkRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,18 +27,22 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.Timer
 import java.util.TimerTask
-
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class MainActivity : AppCompatActivity(), CitySelectionListener {
-    private lateinit var imAddTime: ImageButton
+    // Class variables
+    private lateinit var imAddTime: TextView
+    private lateinit var isSynced: TextView
     private lateinit var citySelectionView: RecyclerView
     private lateinit var citiesAdapter: CitiesAdapter
     private lateinit var citySelectAdapter: CitySelectionAdapter
 
+    // List and booleans
     private var cityList: MutableList<Cities> = ArrayList()
     private var isInternetAvailable: Boolean = false
-    private var ntpTimeSet: Boolean = false
 
+    // Time variables
     private var timeToUse: Date? = Date(System.currentTimeMillis())
     private var trueTime: Date? = null
     private var timeDifference: Long = 0
@@ -43,12 +50,17 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO ability to continue running app in previous state upon pause or shut down
-        // TODO save all variables and states, i.e diff, lists
+        // Checking if there is a saved state (if == null, citylist does not have to load)
         if (savedInstanceState != null) {
-            // Restore data -- Dont need to save trueTime or timeToUse cause its systemTime || calculated via timeDifference
             timeDifference = savedInstanceState.getLong("timeDifference", timeDifference)
+            cityList = getCityListSP()
         }
+
+        // Setting the views
+        setContentView(R.layout.activity_main)
+        imAddTime = findViewById(R.id.addButton)
+        isSynced = findViewById(R.id.syncedNtp)
+        citySelectionView = findViewById(R.id.citySelectionView)
 
         //Checking network
         checkInternet()
@@ -60,11 +72,6 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         // Keeping the clock up to date continuously
         val clockUpdateTimer = Timer()
         clockUpdateTimer.scheduleAtFixedRate(object : TimerTask() { override fun run() { runTaskTwo() } },0, 1000)
-
-        // Setting the views
-        setContentView(R.layout.activity_main)
-        imAddTime = findViewById(R.id.addButton)
-        citySelectionView = findViewById(R.id.citySelectionView)
 
         // Initiating the CityAdapter and listener for selection
         citiesAdapter = CitiesAdapter(this, cityList)
@@ -98,6 +105,37 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         }
     }
 
+    // Saving instance states through bundle
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putLong("timeDifference", timeDifference)
+    }
+    // Using onPause to save the list
+    override fun onPause() {
+        super.onPause()
+        setCityListSP(cityList)
+    }
+
+    // "Setter" for saving the list of cities using shared preferences
+    private fun setCityListSP(cityList: MutableList<Cities>) {
+        // Setting up storage and data modifier using gson to serialize into json
+        val sp = getSharedPreferences("Cities_List", Context.MODE_PRIVATE)
+        val editor = sp.edit()
+        val gson = Gson()
+        val json = gson.toJson(cityList)
+        editor.putString("cityList", json)
+        editor.apply()
+    }
+
+    // "Getter" for loading the list of cities using shared preferences
+    private fun getCityListSP(): MutableList<Cities> {
+        // Reading and deserializing json
+        val sp = getSharedPreferences("Cities_List", Context.MODE_PRIVATE)
+        val json = sp.getString("cityList", null)
+        val gson = Gson()
+        return gson.fromJson(json, object : TypeToken<MutableList<Cities>>() {}.type) ?: ArrayList()
+    }
+
     // Necessary annotation for coroutine below
     @OptIn(DelicateCoroutinesApi::class)
     private fun runTaskOne() {
@@ -126,25 +164,19 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
     private fun runTaskTwo() {
         val systemTime = System.currentTimeMillis()
         val calendar = Calendar.getInstance()
-
+        Log.d("Internet", "Is internet available: $isInternetAvailable")
         // If a connection exists and NTP time has been received, use NTP time else default system time
         if (isInternetAvailable && trueTime != null){
             timeToUse = Date(systemTime + timeDifference)
-            // TODO true = green for ntp synced time
-            ntpTimeSet = true
+            runOnUiThread { isSynced.text = getString(R.string.ntp_synced) }
         } else {
             timeToUse = Date(systemTime)
-            // TODO false = red for non-synced system time
-            ntpTimeSet = false
+            runOnUiThread { isSynced.text = getString(R.string.ntp_not_synced) }
         }
         // In case running on ntp time assuring calendar has time difference
         calendar.time = timeToUse!!
-        if (calendar[Calendar.SECOND] == 0) {
-            // Putting the update on the ui thread for execution
-            runOnUiThread {
-                updateClock()
-            }
-        }
+        // Updating the clock every new minute on the ui thread
+        if (calendar[Calendar.SECOND] == 0) { runOnUiThread { updateClock() } }
     }
 
     // Interface listener, adding selected cities to main frame

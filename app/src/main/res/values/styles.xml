@@ -11,4 +11,9 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="add_button_mod">
+        <item name="android:textColor">@color/honey</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
 </resources>

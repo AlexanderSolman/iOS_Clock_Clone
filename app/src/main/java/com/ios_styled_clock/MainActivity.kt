@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.instacart.library.truetime.TrueTime
@@ -61,6 +62,10 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         imAddTime = findViewById(R.id.addButton)
         isSynced = findViewById(R.id.syncedNtp)
         citySelectionView = findViewById(R.id.citySelectionView)
+
+        val swipeToDeleteCallback = SwipeRemoveCities(this)
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(citySelectionView)
 
         //Checking network
         checkInternet()
@@ -160,11 +165,11 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         }
     }
 
-
+    // Continuously keeps the ui updated
     private fun runTaskTwo() {
         val systemTime = System.currentTimeMillis()
         val calendar = Calendar.getInstance()
-        Log.d("Internet", "Is internet available: $isInternetAvailable")
+
         // If a connection exists and NTP time has been received, use NTP time else default system time
         if (isInternetAvailable && trueTime != null){
             timeToUse = Date(systemTime + timeDifference)
@@ -185,6 +190,13 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         // Updating the time variable used in city selection
         citySelectAdapter.updateTimeVariable(timeToUse)
         citySelectionView.adapter?.notifyItemInserted(cityList.size - 1)
+    }
+
+    fun removeSelectedCity(position: Int) {
+        if (position >= 0 && position < cityList.size) {
+            cityList.removeAt(position)
+            citySelectAdapter.notifyItemRemoved(position)
+        }
     }
 
     // Continuous update of clock

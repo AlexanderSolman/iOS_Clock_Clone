@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
@@ -60,8 +61,7 @@ class BottomFragment() : Fragment() {
 
         // Listener for cancel button
         cancelButton.setOnClickListener{
-            val fragmentVisible = view.findViewById<FrameLayout>(R.id.fragmentView)
-            if (fragmentVisible.visibility == View.VISIBLE) { fragmentVisible.visibility = View.GONE }
+            closeFragment()
             // Setting background of main recycleview back to red
             val citySelectionView = (activity as MainActivity).findViewById<RecyclerView>(R.id.citySelectionView)
             citySelectionView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.scarlet))
@@ -86,6 +86,17 @@ class BottomFragment() : Fragment() {
             }
         })
         return view
+    }
+
+    // Function to handle closing the fragment and add exit animation
+    fun closeFragment() {
+        val fragmentVisible = view?.findViewById<FrameLayout>(R.id.fragmentView)
+        if (fragmentVisible != null) {
+            if (fragmentVisible.visibility == View.VISIBLE) {
+                fragmentVisible.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_animation_exit))
+                fragmentVisible.visibility = View.GONE
+            }
+        }
     }
 
     fun filterSearch(unFilteredList: List<Cities>, query: String?): List<Cities> {
@@ -113,7 +124,6 @@ class BottomFragment() : Fragment() {
         fun newInstance(citySelectionListener: CitySelectionListener) =
             BottomFragment().apply {
                 arguments = Bundle().apply {
-
                 }
             }
     }

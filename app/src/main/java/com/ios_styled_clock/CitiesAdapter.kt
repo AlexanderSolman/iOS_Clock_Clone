@@ -35,10 +35,6 @@ class CitiesAdapter(private val context: Context, private val citiesList: List<C
         holder.itemView.setOnClickListener {
             val selectedCity = citiesList[position]
             citySelectionListener?.onCitySelected(selectedCity)
-
-            // Closing the fragment view upon selection
-            val fragmentVisible = (context as AppCompatActivity).findViewById<FragmentContainerView>(R.id.fragmentView)
-            fragmentVisible.visibility = View.GONE
         }
     }
 

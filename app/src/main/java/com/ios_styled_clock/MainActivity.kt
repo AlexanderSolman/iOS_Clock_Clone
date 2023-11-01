@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -89,6 +91,8 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
 
         // Add button listener
         imAddTime.setOnClickListener{view ->
+            val fragmentVisible = findViewById<FragmentContainerView>(R.id.fragmentView)
+            fragmentVisible.visibility = View.GONE
             var fragment: Fragment? = null
             when (view.id) {
                 R.id.addButton -> {
@@ -102,13 +106,13 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
             if (fragment != null){
                 // TODO Make fragment animation
                 // Setting the fragment visible
-                val fragmentVisible = findViewById<FragmentContainerView>(R.id.fragmentView)
-                if (fragmentVisible.visibility == View.GONE) { fragmentVisible.visibility = View.VISIBLE }
 
                 // Handling the fragment transaction
                 val transaction = supportFragmentManager.beginTransaction()
+                transaction.setCustomAnimations(R.anim.fragment_animation, 0)
                 transaction.replace(R.id.fragmentView, fragment)
                 transaction.commit()
+                if (fragmentVisible.visibility == View.GONE) { fragmentVisible.visibility = View.VISIBLE }
             }
         }
     }
@@ -190,16 +194,33 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
 
     // Interface listener, adding selected cities to main frame
     override fun onCitySelected(city: Cities) {
-        cityList.add(city)
-        // Updating the time variable used in city selection
-        citySelectAdapter.updateTimeVariable(timeToUse)
-        citySelectionView.adapter?.notifyItemInserted(cityList.size - 1)
+        // Checking if city is already added before adding
+        if (checkIfCityExist(city)) {
+            cityList.add(city)
+            // Updating the time variable used in city selection
+            citySelectAdapter.updateTimeVariable(timeToUse)
+            citySelectionView.adapter?.notifyItemInserted(cityList.size - 1)
+        }
+
+        // Accessing the closeFragment() function is bottomfragment for exit animation
+        val currentBottomFragment = supportFragmentManager.findFragmentById(R.id.fragmentView) as? BottomFragment
+        currentBottomFragment?.closeFragment()
 
         // When new city is added delay until background is set back to red (otherwise the card blinks)
         Handler(Looper.getMainLooper()).postDelayed({
             citySelectionView.findViewById<RecyclerView>(R.id.citySelectionView).
             setBackgroundColor(ContextCompat.getColor(this, R.color.scarlet))
         }, 500)
+    }
+
+    // Function to limit same city additions
+    private fun checkIfCityExist(city: Cities): Boolean {
+        for (cities in cityList) {
+            if (cities.getCity() == city.getCity()) {
+                return false
+            }
+        }
+        return true
     }
 
     fun removeSelectedCity(position: Int) {

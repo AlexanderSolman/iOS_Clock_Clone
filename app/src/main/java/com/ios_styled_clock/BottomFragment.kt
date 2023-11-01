@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -61,6 +62,9 @@ class BottomFragment() : Fragment() {
         cancelButton.setOnClickListener{
             val fragmentVisible = view.findViewById<FrameLayout>(R.id.fragmentView)
             if (fragmentVisible.visibility == View.VISIBLE) { fragmentVisible.visibility = View.GONE }
+            // Setting background of main recycleview back to red
+            val citySelectionView = (activity as MainActivity).findViewById<RecyclerView>(R.id.citySelectionView)
+            citySelectionView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.scarlet))
         }
 
         // Listener for search bar

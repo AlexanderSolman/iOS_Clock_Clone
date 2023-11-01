@@ -6,9 +6,9 @@ import android.net.Network
 import android.net.NetworkRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -94,6 +94,9 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
                 R.id.addButton -> {
                     // Creating a new instance of fragment, passing the mainactivity to not overwrite the listener
                     fragment = BottomFragment.newInstance(this)
+                    // Setting recyclerview background black to prep for new city choices
+                    citySelectionView.findViewById<RecyclerView>(R.id.citySelectionView).setBackgroundColor(
+                        ContextCompat.getColor(this, R.color.black))
                 }
             }
             if (fragment != null){
@@ -191,6 +194,12 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         // Updating the time variable used in city selection
         citySelectAdapter.updateTimeVariable(timeToUse)
         citySelectionView.adapter?.notifyItemInserted(cityList.size - 1)
+
+        // When new city is added delay until background is set back to red (otherwise the card blinks)
+        Handler(Looper.getMainLooper()).postDelayed({
+            citySelectionView.findViewById<RecyclerView>(R.id.citySelectionView).
+            setBackgroundColor(ContextCompat.getColor(this, R.color.scarlet))
+        }, 500)
     }
 
     fun removeSelectedCity(position: Int) {

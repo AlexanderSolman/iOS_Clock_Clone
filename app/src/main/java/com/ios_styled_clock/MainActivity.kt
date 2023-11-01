@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -104,10 +102,7 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
                 }
             }
             if (fragment != null){
-                // TODO Make fragment animation
-                // Setting the fragment visible
-
-                // Handling the fragment transaction
+                // Handling the fragment transaction with animation
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.setCustomAnimations(R.anim.fragment_animation, 0)
                 transaction.replace(R.id.fragmentView, fragment)

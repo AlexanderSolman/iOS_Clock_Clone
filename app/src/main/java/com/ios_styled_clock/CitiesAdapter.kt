@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.RecyclerView
 
 class CitiesAdapter(private val context: Context, private val citiesList: List<Cities>): RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {

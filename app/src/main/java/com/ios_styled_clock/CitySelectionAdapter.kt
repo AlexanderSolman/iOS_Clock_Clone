@@ -15,6 +15,7 @@ class CitySelectionAdapter(private val cities: List<Cities>, private var timeToU
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cityNameTextView: TextView = itemView.findViewById(R.id.cityNameTextView)
         val cityClockView: TextView = itemView.findViewById(R.id.cityClockView)
+        val cityTimeZone: TextView = itemView.findViewById(R.id.cityTimeZone)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,9 +27,18 @@ class CitySelectionAdapter(private val cities: List<Cities>, private var timeToU
         // Handling the displaying of object
         val city = cities[position]
         holder.cityNameTextView.text = city.getCity()
-
         // Handle time logic upon selection initially, getting time zone
         val timeZone = TimeZone.getTimeZone(city.getTimeZone())
+
+        // Calculating the offset for chosen city
+        val offset = timeToUse?.let { timeZone.getOffset(it.time) }
+        val offsetHours = offset?.div(3600000)
+        val offsetSign = if (offsetHours!! >= 0) "+" else "-"
+
+        // Building the string to use for time zone display
+        val sb = StringBuilder()
+        holder.cityTimeZone.text = sb.append("GMT").append(offsetSign).append("$offsetHours").toString()
+
         // Altering time to use with time zone offset, original time has offset so subtracting original offset
         val zonedTime = timeToUse?.let { Date(it.time + timeZone.getOffset(it.time) - (1 * 3600 * 1000)) } ?: Date()
         // Formatting then displaying the time

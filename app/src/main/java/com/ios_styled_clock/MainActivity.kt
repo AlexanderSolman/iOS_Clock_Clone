@@ -160,8 +160,6 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
                 // Time difference holds the true ntp time against system time
                 if(trueTime != null) { timeDifference = trueTime!!.time - System.currentTimeMillis() + calculateRoundTripTime }
             }
-        }else {
-            timeDifference = 0
         }
     }
 
@@ -182,6 +180,9 @@ class MainActivity : AppCompatActivity(), CitySelectionListener {
         calendar.time = timeToUse!!
         // Updating the clock every new minute on the ui thread
         if (calendar[Calendar.SECOND] == 0) { runOnUiThread { updateClock() } }
+        // Assuring that the clock is updated even if network connection comes on and off frequently (if it misses second = 0)
+        val timeFormat = SimpleDateFormat("mm", Locale.getDefault())
+        if (calendar[Calendar.MINUTE] != timeToUse?.let { timeFormat.format(it) }?.toInt()) { runOnUiThread { updateClock() } }
     }
 
     // Interface listener, adding selected cities to main frame

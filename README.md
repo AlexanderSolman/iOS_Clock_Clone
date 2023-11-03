@@ -26,3 +26,15 @@
 2. Tap the "Add" button to select cities.
 3. Choose cities from the list provided in the fragment.
 4. The selected cities and their local times will be displayed on the main screen.
+
+## Known Issues
+
+- Animation inconsistency when opening the fragment at start.
+- Clock update could skip which seems to be network related.
+
+## Future Improvements
+
+- Resolve animation inconsistencies in the fragment.
+- Implement custom fonts for text elements.
+- Add additional features, such as alarm and timer.
+

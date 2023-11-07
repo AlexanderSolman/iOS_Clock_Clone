@@ -228,5 +228,370 @@
     "city": "Monaco",
     "country": "Monaco",
     "timeZoneId": "Europe/Monaco"
+  },
+  {
+    "city": "Quebec",
+    "country": "Canada",
+    "timeZoneId": "America/Toronto"
+  },
+  {
+    "city": "Calgary",
+    "country": "Canada",
+    "timeZoneId": "America/Edmonton"
+  },
+  {
+    "city": "Edmonton",
+    "country": "Canada",
+    "timeZoneId": "America/Edmonton"
+  },
+  {
+    "city": "Winnipeg",
+    "country": "Canada",
+    "timeZoneId": "America/Winnipeg"
+  },
+  {
+    "city": "Halifax",
+    "country": "Canada",
+    "timeZoneId": "America/Halifax"
+  },
+  {
+    "city": "Seattle",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "Portland",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "San Francisco",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "Los Angeles",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "San Diego",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "Spokane",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "Boise",
+    "country": "USA",
+    "timeZoneId": "America/Boise"
+  },
+  {
+    "city": "Las Vegas",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "Phoenix",
+    "country": "USA",
+    "timeZoneId": "America/Phoenix"
+  },
+  {
+    "city": "Tuscon",
+    "country": "USA",
+    "timeZoneId": "America/Phoenix"
+  },
+  {
+    "city": "Salt Lake City",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Bozeman",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Billings",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Albuquerque",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Denver",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Casper",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Cheyenne",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Bismarck",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Rapid City",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Sioux Falls",
+    "country": "USA",
+    "timeZoneId": "America/Denver"
+  },
+  {
+    "city": "Lincoln",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Omaha",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Kansas City",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Oklahoma City",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Dallas",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Austin",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "San Antonio",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Houston",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "New Orleans",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Jackson",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Conway",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "St Louis",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Memphis",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Des Moines",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Lewiston",
+    "country": "USA",
+    "timeZoneId": "America/Los_Angeles"
+  },
+  {
+    "city": "Ellsworth",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Honolulu",
+    "country": "Hawaii",
+    "timeZoneId": "Pacific/Honolulu"
+  },
+  {
+    "city": "Minneapolis",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Milwaukee",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Detroit",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Indianapolis",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Columbus",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Cincinnati",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Louisville",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Nashville",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Birmingham",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Montgomery",
+    "country": "USA",
+    "timeZoneId": "America/Chicago"
+  },
+  {
+    "city": "Jacksonville",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Orlando",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Tampa",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Miami",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Atlanta",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Charlotte",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Richmond",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Beckley",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Norfolk",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Pittsburgh",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Washington",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Charleston",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Dover",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Philadelphia",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Buffalo",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Hartford",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Boston",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Syracuse",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Albany",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Concord",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
+  },
+  {
+    "city": "Burlington",
+    "country": "USA",
+    "timeZoneId": "America/New_York"
   }
 ]

@@ -83,5 +83,150 @@
     "city": "Vancouver",
     "country": "Canada",
     "timeZoneId": "America/Vancouver"
+  },
+  {
+    "city": "Oslo",
+    "country": "Norway",
+    "timeZoneId": "Europe/Oslo"
+  },
+  {
+    "city": "Tallinn",
+    "country": "Estonia",
+    "timeZoneId": "Europe/Tallinn"
+  },
+  {
+    "city": "Riga",
+    "country": "Latvia",
+    "timeZoneId": "Europe/Riga"
+  },
+  {
+    "city": "Vilnius",
+    "country": "Lithuania",
+    "timeZoneId": "Europe/Vilnius"
+  },
+  {
+    "city": "Berlin",
+    "country": "Germany",
+    "timeZoneId": "Europe/Berlin"
+  },
+  {
+    "city": "Munich",
+    "country": "Germany",
+    "timeZoneId": "Europe/Munich"
+  },
+  {
+    "city": "Amsterdam",
+    "country": "Netherlands",
+    "timeZoneId": "Europe/Amsterdam"
+  },
+  {
+    "city": "Brussels",
+    "country": "Belgium",
+    "timeZoneId": "Europe/Brussels"
+  },
+  {
+    "city": "Dublin",
+    "country": "Ireland",
+    "timeZoneId": "Europe/Dublin"
+  },
+  {
+    "city": "Lisbon",
+    "country": "Portugal",
+    "timeZoneId": "Europe/Lisbon"
+  },
+  {
+    "city": "Athens",
+    "country": "Greece",
+    "timeZoneId": "Europe/Athens"
+  },
+  {
+    "city": "Sofia",
+    "country": "Bulgaria",
+    "timeZoneId": "Europe/Sofia"
+  },
+  {
+    "city": "Skopje",
+    "country": "North Macedonia",
+    "timeZoneId": "Europe/Skopje"
+  },
+  {
+    "city": "Tirane",
+    "country": "Albania",
+    "timeZoneId": "Europe/Tirane"
+  },
+  {
+    "city": "Podgorica",
+    "country": "Montenegro",
+    "timeZoneId": "Europe/Podgorica"
+  },
+  {
+    "city": "Sarajevo",
+    "country": "Bosnia and Herzegovina",
+    "timeZoneId": "Europe/Sarajevo"
+  },
+  {
+    "city": "Zagreb",
+    "country": "Croatia",
+    "timeZoneId": "Europe/Zagreb"
+  },
+  {
+    "city": "Belgrade",
+    "country": "Serbia",
+    "timeZoneId": "Europe/Belgrade"
+  },
+  {
+    "city": "Bucharest",
+    "country": "Romania",
+    "timeZoneId": "Europe/Bucharest"
+  },
+  {
+    "city": "Chisinau",
+    "country": "Moldova",
+    "timeZoneId": "Europe/Chisinau"
+  },
+  {
+    "city": "Kyiv",
+    "country": "Ukraine",
+    "timeZoneId": "Europe/Kiev"
+  },
+  {
+    "city": "Minsk",
+    "country": "Belarus",
+    "timeZoneId": "Europe/Belarus"
+  },
+  {
+    "city": "Budapest",
+    "country": "Hungary",
+    "timeZoneId": "Europe/Budapest"
+  },
+  {
+    "city": "Vienna",
+    "country": "Austria",
+    "timeZoneId": "Europe/Vienna"
+  },
+  {
+    "city": "Ljubljana",
+    "country": "Slovenia",
+    "timeZoneId": "Europe/Ljubljana"
+  },
+  {
+    "city": "Bratislava",
+    "country": "Slovakia",
+    "timeZoneId": "Europe/Bratislava"
+  },
+  {
+    "city": "Luxembourg",
+    "country": "Luxembourg",
+    "timeZoneId": "Europe/Luxembourg"
+  },
+  {
+    "city": "Andorra la Vella",
+    "country": "Andorra",
+    "timeZoneId": "Europe/Andorra"
+  },
+  {
+    "city": "Monaco",
+    "country": "Monaco",
+    "timeZoneId": "Europe/Monaco"
   }
 ]

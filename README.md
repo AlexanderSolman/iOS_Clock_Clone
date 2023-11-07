@@ -31,7 +31,6 @@
 
 - Animation inconsistency when opening the fragment at start.
 - Clock update could skip which seems to be network related.
-- Not possible to properly scroll in long list of cities.
 
 ## Future Improvements
 

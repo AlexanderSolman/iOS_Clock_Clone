@@ -33,17 +33,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/syncedNtp" />
 
-    <!-- List of chosen cities -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/citySelectionView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/scarlet"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
         app:layout_constraintTop_toBottomOf="@+id/global_header"
-        tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/selected_city_items" />
+        tools:layout_editor_absoluteX="0dp">
+
+        <!-- List of chosen cities -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/citySelectionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/scarlet"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/selected_city_items" />
+    </ScrollView>
 
     <!-- View from cities selection -->
     <androidx.fragment.app.FragmentContainerView

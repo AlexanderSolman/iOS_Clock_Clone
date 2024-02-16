@@ -32,9 +32,4 @@
 - Animation inconsistency when opening the fragment at start.
 - Clock update could skip which seems to be network related.
 
-## Future Improvements
-
-- Resolve animation inconsistencies in the fragment.
-- Implement custom fonts for text elements.
-- Add additional features, such as alarm and timer.
-
+## Contributing
